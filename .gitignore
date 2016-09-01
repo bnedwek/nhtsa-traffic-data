@@ -1,6 +1,8 @@
 # Data directory
 data
 
+# R data files
+*.Rda
 
 # Windows image file caches
 Thumbs.db
