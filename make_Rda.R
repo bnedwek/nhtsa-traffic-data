@@ -11,7 +11,7 @@ MakeRda <- function(stub) {
 	assign(stub, data)
 
 	outfile <- paste(stub, '.Rda', sep='')
-	save(stub, file=paste(DEV_DIR, outfile, sep="/"))
+	save(list=c(stub), file=paste(DEV_DIR, outfile, sep="/"))
 
 }
 
