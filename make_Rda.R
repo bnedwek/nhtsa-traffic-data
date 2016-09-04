@@ -1,16 +1,21 @@
-library(dplyr)
-
 DATA_DIR <- 'data/FARS2015NationalCSV'
 DEV_DIR  <- '~/Documents/dev/nhtsa-traffic-data'
 
-accidents <- read.csv(paste(DATA_DIR, 'ACC_AUX.CSV', sep='/'), stringsAsFactors=F)
-persons   <- read.csv(paste(DATA_DIR, 'PER_AUX.CSV', sep='/'), stringsAsFactors=F)
-vehicles  <- read.csv(paste(DATA_DIR, 'VEH_AUX.CSV', sep='/'), stringsAsFactors=F)
+MakeRda <- function(stub) {
 
-names(accidents) <- tolower(names(accidents))
-names(persons)   <- tolower(names(persons))
-names(vehicles)  <- tolower(names(vehicles))
+	infile <- paste(stub, '.csv', sep='')
 
-save(accidents, file=paste(DEV_DIR, 'accidents.Rda', sep='/'))
-save(persons,   file=paste(DEV_DIR, 'persons.Rda', sep='/'))
-save(vehicles,  file=paste(DEV_DIR, 'vehicles.Rda', sep='/'))
+	data <- read.csv(paste(DATA_DIR, infile, sep='/'), stringsAsFactors=F)
+	names(data) <- tolower(names(data))
+
+	assign(stub, data)
+
+	outfile <- paste(stub, '.Rda', sep='')
+	save(stub, file=paste(DEV_DIR, outfile, sep="/"))
+
+}
+
+data.files <- c('accident', 'damage', 'distract', 'drimpair', 'factor', 'maneuver', 'person',
+	'safetyeq', 'vehicle', 'violatn', 'vision')
+
+sapply(data.files, MakeRda)
