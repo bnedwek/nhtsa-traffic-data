@@ -1,5 +1,5 @@
 DATA_DIR <- 'data/FARS2015NationalCSV'
-DEV_DIR  <- '~/Documents/dev/nhtsa-traffic-data'
+DEV_DIR  <- '~/Documents/dev/nhtsa-traffic-data/data'
 
 MakeRda <- function(stub) {
 
